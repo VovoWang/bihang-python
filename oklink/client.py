@@ -109,12 +109,7 @@ class Oklink:
         all_url = OKLINK_ENDPOINT + '/' + url + ('' if data is None else '?'+ urllib.parse.urlencode(data) )
         response = self.session.put(url=all_url, params=self._apply_authentication(url))
         self._check_status_code(response)
-        if return_data and json_data:
-            results = response.json()
-            self._check_request_success(results, response)
-            return results
-        elif return_data:
-            return response.content
+        return response.json
 
     def delete(self, url, return_data=False, json_data=True):
         """
