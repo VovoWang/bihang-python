@@ -89,7 +89,7 @@ class Oklink:
         all_url = OKLINK_ENDPOINT + '/' + url + ('' if data is None else '?'+ urllib.parse.urlencode(data) )
         response = self.session.get(url=all_url, params=self._apply_authentication(url))
         self._check_status_code(response)
-        return response.json
+        return response.json()
 
 
     def post(self, url, data=None):
@@ -100,7 +100,7 @@ class Oklink:
         all_url = OKLINK_ENDPOINT + '/' + url
         response = self.session.post(url=all_url, params=self._apply_authentication(url))
         self._check_status_code(response)
-        return response.json
+        return response.json()
 
     def put(self, url, data=None, return_data=False, json_data=True):
         """
@@ -109,7 +109,7 @@ class Oklink:
         all_url = OKLINK_ENDPOINT + '/' + url + ('' if data is None else '?'+ urllib.parse.urlencode(data) )
         response = self.session.put(url=all_url, params=self._apply_authentication(url))
         self._check_status_code(response)
-        return response.json
+        return response.json()
 
     def delete(self, url, return_data=False, json_data=True):
         """
@@ -118,4 +118,4 @@ class Oklink:
         all_url = OKLINK_ENDPOINT + '/' + url + ('' if data is None else '?'+ urllib.parse.urlencode(data) )
         response = self.session.delete(url=all_url, params=self._apply_authentication(url))
         self._check_status_code(response)
-        return response.json
+        return response.json()
