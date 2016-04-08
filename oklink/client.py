@@ -7,15 +7,15 @@ import hmac
 import os
 import urllib.parse
 import httplib2
-from oklink.config import *
-from oklink.erro import *
-class Oklink:
+from bihang.config import *
+from bihang.erro import *
+class Bihang:
 
     def __init__(self, oauth2_credentials=None, api_key=None, api_secret=None, nonce_multipler=1e6):
         """
-        :param oauth2_credentials: JSON representation of Oklink oauth2 credentials
-        :param api_key:  Oklink API key
-        :param api_key:  Oklink API Secret
+        :param oauth2_credentials: JSON representation of Bihang oauth2 credentials
+        :param api_key:  Bihang API key
+        :param api_key:  Bihang API Secret
         :param nonce_multipler: Multipler used for nonce (API_KEY+Secret)
         """
         self.session = requests.session()
@@ -34,7 +34,7 @@ class Oklink:
             self.token_expired = False
             try:
                 self._check_oauth_expired()
-            except OklinkResponseException:
+            except ResponseException:
                 self.token_expired = True
             self.oauth2_credentials.apply(headers=self.session.headers)
 
@@ -71,7 +71,7 @@ class Oklink:
         Check the for bad status codes
         """
         if response.status_code >= 400:
-            raise erro.OklinkResponseException('Recieved %s code form oklink' % response.status_code, response)  
+            raise erro.ResponseException('Recieved %s code form bihang' % response.status_code, response)  
 
     def _check_oauth_expired(self):
         """
@@ -83,10 +83,10 @@ class Oklink:
 
     def get(self, url, data=None):
         """
-        Sends a GET request to Oklink. This should not be called directly
+        Sends a GET request to Bihang. This should not be called directly
         """
 
-        all_url = OKLINK_ENDPOINT + '/' + url + ('' if data is None else '?'+ urllib.parse.urlencode(data) )
+        all_url = ENDPOINT + '/' + url + ('' if data is None else '?'+ urllib.parse.urlencode(data) )
         response = self.session.get(url=all_url, params=self._apply_authentication(url))
         self._check_status_code(response)
         return response.json()
@@ -94,28 +94,28 @@ class Oklink:
 
     def post(self, url, data=None):
         """
-        Sends a POST request to Oklink. This should not be called directly
+        Sends a POST request to Bihang. This should not be called directly
         """
         data = json.dumps(data)
-        all_url = OKLINK_ENDPOINT + '/' + url
+        all_url = ENDPOINT + '/' + url
         response = self.session.post(url=all_url, params=self._apply_authentication(url))
         self._check_status_code(response)
         return response.json()
 
     def put(self, url, data=None, return_data=False, json_data=True):
         """
-        Sends a PUT request to Oklink. This should not be called directly
+        Sends a PUT request to Bihang. This should not be called directly
         """
-        all_url = OKLINK_ENDPOINT + '/' + url + ('' if data is None else '?'+ urllib.parse.urlencode(data) )
+        all_url = ENDPOINT + '/' + url + ('' if data is None else '?'+ urllib.parse.urlencode(data) )
         response = self.session.put(url=all_url, params=self._apply_authentication(url))
         self._check_status_code(response)
         return response.json()
 
     def delete(self, url, return_data=False, json_data=True):
         """
-        Sends a DELETE request to Oklink. This should not be called directly
+        Sends a DELETE request to Bihang. This should not be called directly
         """
-        all_url = OKLINK_ENDPOINT + '/' + url + ('' if data is None else '?'+ urllib.parse.urlencode(data) )
+        all_url = ENDPOINT + '/' + url + ('' if data is None else '?'+ urllib.parse.urlencode(data) )
         response = self.session.delete(url=all_url, params=self._apply_authentication(url))
         self._check_status_code(response)
         return response.json()
