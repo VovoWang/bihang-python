@@ -1,9 +1,9 @@
-PACKAGE = "oklink"
-NAME = "oklink"
-DESCRIPTION = "oklink api python sdk"
+PACKAGE = "bihang"
+NAME = "bihang"
+DESCRIPTION = "bihang api python sdk"
 AUTHOR = "liu tao"
-AUTHOR_EMAIL = "support@oklink.com"
-URL = "https://www.oklink.com"
+AUTHOR_EMAIL = "support@bihang.com"
+URL = "https://www.bihang.com"
 VERSION = __import__(PACKAGE).__version__
 
 setup(
