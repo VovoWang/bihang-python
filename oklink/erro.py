@@ -1,4 +1,4 @@
-class OklinkResponseException(Exception):
+class ResponseException(Exception):
     def __init__(self, msg, response):
         self.msg = msg
         self.response = response
