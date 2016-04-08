@@ -1,10 +1,10 @@
-from oklink.client import Oklink
-class OklinkClient(Oklink):
+from bihang.client import Bihang
+class BihangClient(Bihang):
     def __init__(self,http):
         self.http = http
     @staticmethod
     def api_secret(api_key, api_secret):
-        return OklinkClient(Oklink(api_key = api_key, api_secret = api_secret))  
+        return BihangClient(Bihang(api_key = api_key, api_secret = api_secret))  
 
 
     def addressesAddress(self, params=None):
